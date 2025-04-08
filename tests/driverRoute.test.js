@@ -1,6 +1,5 @@
 import { describe, expect, vi } from "vitest";
 import * as driverController from "../src/controllers/driverController.js";
-import * as driverRepository from "../src/repositories/driverRepository.js";
 import * as driverService from "../src/services/driverService.js";
 import { fakeResponse } from "../src/utils/testUtils.js";
 import { BadRequestError } from "../src/errors/customErrors.js";
