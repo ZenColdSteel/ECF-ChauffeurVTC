@@ -1,0 +1,10 @@
+import express from "express";
+import * as driverController from "../controllers/driverController.js";
+// import { authenticate } from "../middlewares/authenticate.js";
+const router = express.Router();
+// router.use(authenticate);
+router.get("/:id", driverController.getDriverById);
+router.post("", driverController.createDriver);
+router.delete("/:id", driverController.deleteDriver);
+// router.get("/:id", driverController.getDriverByName);
+export default router;

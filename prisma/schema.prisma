@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Chauffeur {
+  chauffeur_id  Int      @id @default(autoincrement()) @map("chauffeur_id")
+  nom           String   @db.VarChar(255)
+  permis        String   @db.VarChar(50)
+  disponibilite Boolean
+  assignations  Assignation[]
+
+  @@map("chauffeur")
+}
+
+model Vehicule {
+  vehicule_id      Int      @id @default(autoincrement()) @map("vehicule_id")
+  modele           String   @db.VarChar(255)
+  immatriculation  String   @unique @db.VarChar(50)
+  statut           String   @db.VarChar(50)
+  assignations     Assignation[]
+
+  @@map("vehicule")
+}
+
+model Assignation {
+  assignation_id Int       @id @default(autoincrement()) @map("assignation_id")
+  chauffeur_id   Int
+  vehicule_id    Int
+  date           DateTime  @db.Timestamp
+
+  chauffeur      Chauffeur @relation(fields: [chauffeur_id], references: [chauffeur_id])
+  vehicule       Vehicule  @relation(fields: [vehicule_id], references: [vehicule_id])
+
+  @@index([chauffeur_id])
+  @@index([vehicule_id])
+  @@map("assignation")
+}

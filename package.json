@@ -1,0 +1,57 @@
+{
+  "name": "match-making",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch src/app.js",
+    "seed": "node src/scripts/seed.js",
+    "format": "prettier --write .",
+    "prepare": "husky install",
+    "commit": "npx cz",
+    "lint": "npx eslint .",
+    "prisma-studio": "pnpm exec prisma studio",
+    "prisma-migrate": "pnpm exec prisma migrate dev --name init",
+    "prisma-reset": "pnpm exec prisma migrate reset --force --skip-seed",
+    "test": "vitest run",
+    "test:watch": "vitest --watch",
+    "reset-db": "node src/utils/resetDbUtils.js"
+  },
+  "lint-staged": {
+    "*.{js,mjs}": "eslint --fix",
+    "*.{json,css,md}": "prettier --write"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.7.1",
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "@eslint/js": "^9.23.0",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "^9.23.0",
+    "globals": "^16.0.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.5.0",
+    "prettier": "^3.5.3",
+    "prisma": "^6.5.0",
+    "supertest": "^7.1.0",
+    "vitest": "^3.0.9"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.5.0",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
