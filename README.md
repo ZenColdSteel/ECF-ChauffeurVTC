@@ -24,8 +24,9 @@ Pour démarrer ce projet en local :
 1. **Clonez le dépôt**
 
    ```bash
-   git clone git@github.com:DyBryck/match-making.git
-   cd match-making
+   git clone https://github.com/ZenColdSteel/ECF-ChauffeurVTC
+   cd ECF
+   cd back-end
    ```
 
 2. **Installez les dépendances**  
@@ -82,13 +83,7 @@ Ce projet utilise les technologies suivantes :
 Voici quelques scripts définis dans le fichier `package.json` :
 
 - **`pnpm run dev`**
-  Lance le serveur en mode développement.
-
-- **`pnpm run lint`**
-  Exécute ESLint sur l'ensemble du projet.
-
-- **`pnpm run format`**
-  Lance Prettier pour formater le code.
+  Lance le serveur en mode développement..
 
 - **`pnpm commit`**
   Utilise Commitizen pour formuler des messages de commit standardisés.
