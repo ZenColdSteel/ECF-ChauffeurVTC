@@ -11,12 +11,6 @@ export const getDriverById = async (id) =>
   );
 
 
-export const getDriverByName = async (nom) =>
-  prismaErrorHandler(() =>
-    prisma.nom.findUniqueOrThrow({
-      where: { nom: nom },
-    }),
-  );
 
 export const createDriver = async (data) =>
   prismaErrorHandler(() =>
@@ -28,5 +22,12 @@ export const deleteDriver = async (id) =>
   prismaErrorHandler(() =>
     prisma.chauffeur.delete({
       where: { chauffeur_id: id },
+    }),
+  );
+export const updateDriver = async (id, data) =>
+  prismaErrorHandler(() =>
+    prisma.chauffeur.update({
+      where: { chauffeur_id: id },
+      data: data,
     }),
   );

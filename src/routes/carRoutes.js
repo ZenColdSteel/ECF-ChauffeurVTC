@@ -1,0 +1,12 @@
+import express from "express";
+import * as carController from "../controllers/carController.js";
+// import { authenticate } from "../middlewares/authenticate.js";
+const router = express.Router();
+// router.use(authenticate);
+router.get("/:id", carController.getCarById);
+router.get("", carController.getCars);
+router.post("", carController.createCar);
+router.delete("/:id", carController.deleteCar);
+router.put("/:id", carController.updateCar);
+// router.get("/:id", driverController.getDriverByName);
+export default router;

@@ -1,0 +1,11 @@
+import express from "express";
+import * as assignationController from "../controllers/assignationController.js";
+// // import { authenticate } from "../middlewares/authenticate.js";
+const router = express.Router();
+// router.use(authenticate);
+router.get("/:id", assignationController.getAssignationById);
+router.get("/car/:id", assignationController.getAssignationByCarId);
+router.get("/driver/:id", assignationController.getAssignationByDriverId);
+router.post("", assignationController.createAssignation);
+router.delete("/:id", assignationController.deleteAssignation);
+export default router;

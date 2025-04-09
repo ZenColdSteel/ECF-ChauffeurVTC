@@ -11,11 +11,6 @@ export const getDriverById = async (body) => {
   return await driverRepository.getDriverById(parseInt(id));
 };
 
-export const getDriverByName = async (body) => {
-  const { email } = body;
-  return await driverRepository.getDriverByName(email);
-};
-
 export const createDriver = async (body) => {
   // Validation des données du conducteur
   const validationErrors = validateDriver(body);
@@ -32,4 +27,10 @@ export const createDriver = async (body) => {
 export const deleteDriver = async (body) => {
   const { id } = body;
   return await driverRepository.deleteDriver(parseInt(id));
+};
+export const updateDriver = async (id, body) => {
+  const driverData = {
+    ...body,
+  };
+  return await driverRepository.updateDriver(parseInt(id), driverData);
 };
