@@ -1,12 +1,11 @@
 import express from "express";
 import * as assignationController from "../controllers/assignationController.js";
-// // import { authenticate } from "../middlewares/authenticate.js";
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 const router = express.Router();
-// router.use(authenticate);
-router.get("/:id", assignationController.getAssignationById);
-router.get("/car/:id", assignationController.getAssignationByCarId);
+router.get("/:id",assignationController.getAssignationById);
+router.get("/car/:id" ,assignationController.getAssignationByCarId);
 router.get("/driver/:id", assignationController.getAssignationByDriverId);
-router.post("", assignationController.createAssignation);
-router.delete("/:id", assignationController.deleteAssignation);
-router.get("", assignationController.getAssignations);
+router.post("", authMiddleware,assignationController.createAssignation);
+router.delete("/:id", authMiddleware,assignationController.deleteAssignation);
+router.get("",assignationController.getAssignations);
 export default router;

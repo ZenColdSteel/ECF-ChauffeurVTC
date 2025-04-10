@@ -1,11 +1,11 @@
 import express from "express";
 import * as driverController from "../controllers/driverController.js";
-// import { authenticate } from "../middlewares/authenticate.js";
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 const router = express.Router();
 // router.use(authenticate);
-router.get("/:id", driverController.getDriverById);
-router.post("", driverController.createDriver);
-router.delete("/:id", driverController.deleteDriver);
-router.get("", driverController.getDrivers);
+router.get("/:id", authMiddleware,driverController.getDriverById);
+router.post("", authMiddleware,driverController.createDriver);
+router.delete("/:id", authMiddleware,driverController.deleteDriver);
+router.get("", authMiddleware,driverController.getDrivers);
 // router.get("/:id", driverController.getDriverByName);
 export default router;

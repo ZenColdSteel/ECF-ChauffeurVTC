@@ -11,3 +11,25 @@ export class BadRequestError extends Error {
     this.name = "BadRequestError";
   }
 }
+export class CustomError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = this.constructor.name;
+  }
+}
+
+
+
+export class UnauthorizedError extends CustomError {
+  constructor(message) {
+    super(message);
+    this.statusCode = 401;
+  }
+}
+
+export class ForbiddenError extends CustomError {
+  constructor(message) {
+    super(message);
+    this.statusCode = 403;
+  }
+}
