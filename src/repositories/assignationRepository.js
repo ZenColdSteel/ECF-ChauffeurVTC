@@ -19,6 +19,7 @@ export const getAssignationByDriverId = async (id) =>
     prismaErrorHandler(() =>
         prisma.assignation.findMany({
             where: { chauffeur_id: id },
+            include: { vehicule: true },
         }),
     );
 export const createAssignation = async (data) =>

@@ -114,3 +114,51 @@ Les contributions sont les bienvenues ! Pour contribuer :
 4. **Respectez les conventions de code**
    - Utilisez ESLint et Prettier pour garantir un code propre et bien formaté.
    - Vérifiez que vos commits passent la validation avec commitlint.
+5. **Documentation des Requêtes Prisma et leurs Équivalents SQL**
+Prisma :
+   javascriptprisma.assignation.findUniqueOrThrow({
+      where: { assignation_id: Number(id) },
+   })
+   SQL :
+   sqlSELECT * FROM Assignation 
+   WHERE assignation_id = <id>;
+   getAssignationByCarId
+   Prisma :
+   javascriptprisma.assignation.findMany({
+      where: { vehicule_id: id },
+   })
+   SQL :
+   sqlSELECT * FROM Assignation 
+   WHERE vehicule_id = <id>;
+   getAssignationByDriverId
+   Prisma :
+   javascriptprisma.assignation.findMany({
+      where: { chauffeur_id: id },
+      include: { vehicule: true },
+   })
+   SQL :
+   sqlSELECT a.*, v.* 
+   FROM Assignation a
+   JOIN Vehicule v ON a.vehicule_id = v.vehicule_id
+   WHERE a.chauffeur_id = <id>;
+   createAssignation
+   Prisma :
+   javascriptprisma.assignation.create({
+      data: data,
+   })
+   SQL :
+   sqlINSERT INTO Assignation (chauffeur_id, vehicule_id, date_debut, date_fin, ...) 
+   VALUES (<data.chauffeur_id>, <data.vehicule_id>, <data.date_debut>, <data.date_fin>, ...);
+   deleteAssignation
+   Prisma :
+   javascriptprisma.assignation.delete({
+      where: { assignation_id: Number(id) },
+   })
+   SQL :
+   sqlDELETE FROM Assignation 
+   WHERE assignation_id = <id>;
+   getAssignations
+   Prisma :
+   javascriptprisma.assignation.findMany()
+   SQL :
+   sqlSELECT * FROM Assignation;
