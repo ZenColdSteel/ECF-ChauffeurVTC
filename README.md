@@ -115,50 +115,120 @@ Les contributions sont les bienvenues ! Pour contribuer :
    - Utilisez ESLint et Prettier pour garantir un code propre et bien formaté.
    - Vérifiez que vos commits passent la validation avec commitlint.
 5. **Documentation des Requêtes Prisma et leurs Équivalents SQL**
-Prisma :
-   javascriptprisma.assignation.findUniqueOrThrow({
-      where: { assignation_id: Number(id) },
-   })
-   SQL :
-   sqlSELECT * FROM Assignation 
-   WHERE assignation_id = <id>;
-   getAssignationByCarId
-   Prisma :
-   javascriptprisma.assignation.findMany({
-      where: { vehicule_id: id },
-   })
-   SQL :
-   sqlSELECT * FROM Assignation 
-   WHERE vehicule_id = <id>;
-   getAssignationByDriverId
-   Prisma :
-   javascriptprisma.assignation.findMany({
-      where: { chauffeur_id: id },
-      include: { vehicule: true },
-   })
-   SQL :
-   sqlSELECT a.*, v.* 
-   FROM Assignation a
-   JOIN Vehicule v ON a.vehicule_id = v.vehicule_id
-   WHERE a.chauffeur_id = <id>;
-   createAssignation
-   Prisma :
-   javascriptprisma.assignation.create({
-      data: data,
-   })
-   SQL :
-   sqlINSERT INTO Assignation (chauffeur_id, vehicule_id, date_debut, date_fin, ...) 
-   VALUES (<data.chauffeur_id>, <data.vehicule_id>, <data.date_debut>, <data.date_fin>, ...);
-   deleteAssignation
-   Prisma :
-   javascriptprisma.assignation.delete({
-      where: { assignation_id: Number(id) },
-   })
-   SQL :
-   sqlDELETE FROM Assignation 
-   WHERE assignation_id = <id>;
-   getAssignations
-   Prisma :
-   javascriptprisma.assignation.findMany()
-   SQL :
-   sqlSELECT * FROM Assignation;
+## Equivalences Prisma / SQL
+
+Ce document présente les équivalences SQL des requêtes Prisma utilisées dans ce projet. Cela démontre une compréhension des opérations SQL sous-jacentes.
+
+### Modèle Prisma: Assignation
+
+Le modèle Prisma `Assignation` est supposé avoir les champs suivants:
+
+-   `assignation_id` (INT, clé primaire)
+-   `vehicule_id` (INT, clé étrangère vers la table `Vehicule`)
+-   `chauffeur_id` (INT, clé étrangère vers la table `Chauffeur`)
+-   `autres_champs` (autres champs de la table)
+
+### Requêtes Prisma et leurs équivalents SQL
+
+1.  **`getAssignationById(id)`**
+
+    -   Prisma:
+
+        ```javascript
+        prisma.assignation.findUniqueOrThrow({
+            where: { assignation_id: Number(id) },
+        });
+        ```
+
+    -   SQL:
+
+        ```sql
+        SELECT * FROM Assignation WHERE assignation_id = <id>;
+        ```
+
+2.  **`getAssignationByCarId(id)`**
+
+    -   Prisma:
+
+        ```javascript
+        prisma.assignation.findMany({
+            where: { vehicule_id: id },
+        });
+        ```
+
+    -   SQL:
+
+        ```sql
+        SELECT * FROM Assignation WHERE vehicule_id = <id>;
+        ```
+
+3.  **`getAssignationByDriverId(id)`**
+
+    -   Prisma:
+
+        ```javascript
+        prisma.assignation.findMany({
+            where: { chauffeur_id: id },
+            include: { vehicule: true },
+        });
+        ```
+
+    -   SQL:
+
+        ```sql
+        SELECT Assignation.*, Vehicule.*
+        FROM Assignation
+        LEFT JOIN Vehicule ON Assignation.vehicule_id = Vehicule.vehicule_id
+        WHERE Assignation.chauffeur_id = <id>;
+        ```
+
+    * Note: Cette requête SQL suppose que vous avez une table `Vehicule` avec une colonne `vehicule_id` et que vous souhaitez inclure toutes les colonnes de `Vehicule`. Ajustez les colonnes sélectionnées si nécessaire.
+
+4.  **`createAssignation(data)`**
+
+    -   Prisma:
+
+        ```javascript
+        prisma.assignation.create({
+            data: data,
+        });
+        ```
+
+    -   SQL:
+
+        ```sql
+        INSERT INTO Assignation (vehicule_id, chauffeur_id, autres_champs)
+        VALUES (<data.vehicule_id>, <data.chauffeur_id>, <data.autres_champs>);
+        ```
+
+    * Note: Remplacez `<data.vehicule_id>`, `<data.chauffeur_id>`, et `<data.autres_champs>` par les valeurs correspondantes de l'objet `data`.
+
+5.  **`deleteAssignation(id)`**
+
+    -   Prisma:
+
+        ```javascript
+        prisma.assignation.delete({
+            where: { assignation_id: Number(id) },
+        });
+        ```
+
+    -   SQL:
+
+        ```sql
+        DELETE FROM Assignation WHERE assignation_id = <id>;
+        ```
+
+6.  **`getAssignations()`**
+
+    -   Prisma:
+
+        ```javascript
+        prisma.assignation.findMany();
+        ```
+
+    -   SQL:
+
+        ```sql
+        SELECT * FROM Assignation;
+        ```
