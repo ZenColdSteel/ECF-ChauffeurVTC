@@ -33,3 +33,5 @@ export const deleteAssignation = async (id) =>
             where: { assignation_id: Number(id) },
         }),
     );
+export const getAssignations = async () =>
+    prismaErrorHandler(() => prisma.assignation.findMany());

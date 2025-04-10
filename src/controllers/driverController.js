@@ -17,3 +17,7 @@ export const updateDriver = handleRequest(async (req) => {
   const driverUpdated = await driverService.updateDriver(req.params.id, req.body);
   return { message: "Chauffeur mis à jour avec succès:", chauffeur: driverUpdated };
 })
+export const getDrivers = handleRequest(async (req) => {
+  const driversFound = await driverService.getDrivers();
+  return { message: "Chauffeurs rencontrés:", chauffeurs: driversFound };
+})

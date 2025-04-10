@@ -6,5 +6,6 @@ const router = express.Router();
 router.get("/:id", driverController.getDriverById);
 router.post("", driverController.createDriver);
 router.delete("/:id", driverController.deleteDriver);
+router.get("", driverController.getDrivers);
 // router.get("/:id", driverController.getDriverByName);
 export default router;

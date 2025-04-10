@@ -10,7 +10,8 @@ export const getDriverById = async (id) =>
     }),
   );
 
-
+export const getDrivers = async () =>
+  prismaErrorHandler(() => prisma.chauffeur.findMany());
 
 export const createDriver = async (data) =>
   prismaErrorHandler(() =>

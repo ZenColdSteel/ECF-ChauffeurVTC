@@ -23,3 +23,7 @@ export const deleteAssignation = handleRequest(async (req) => {
     const assignationDeleted = await assignationService.deleteAssignation(req.params);
     return { message: "Assignation supprimée avec succès:", assignation: assignationDeleted };
 })  
+export const getAssignations = handleRequest(async (req) => {
+    const assignationsFound = await assignationService.getAssignations();
+    return { message: "Assignations rencontrées:", assignations: assignationsFound };
+})

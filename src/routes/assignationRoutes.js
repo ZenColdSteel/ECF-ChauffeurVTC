@@ -8,4 +8,5 @@ router.get("/car/:id", assignationController.getAssignationByCarId);
 router.get("/driver/:id", assignationController.getAssignationByDriverId);
 router.post("", assignationController.createAssignation);
 router.delete("/:id", assignationController.deleteAssignation);
+router.get("", assignationController.getAssignations);
 export default router;

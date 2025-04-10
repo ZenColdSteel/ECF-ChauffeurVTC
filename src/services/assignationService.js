@@ -30,3 +30,7 @@ export const deleteAssignation = async (body) => {
     const assignation = await assignationRepository.deleteAssignation(id);
     return assignation;
 }
+export const getAssignations = async () => {
+    const assignations = await assignationRepository.getAssignations();
+    return assignations;
+}
