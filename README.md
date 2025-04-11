@@ -128,7 +128,7 @@ Le modèle Prisma `Assignation` est supposé avoir les champs suivants:
 -   `chauffeur_id` (INT, clé étrangère vers la table `Chauffeur`)
 -   `autres_champs` (autres champs de la table)
 
-### Requêtes Prisma et leurs équivalents SQL
+### Exemple de Requêtes Prisma et leurs équivalents SQL
 
 1.  **`getAssignationById(id)`**
 
